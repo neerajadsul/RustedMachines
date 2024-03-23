@@ -12,29 +12,30 @@ fn main() {
     // for arg in args {
     //     println!("{}", arg);
     // }
-    println!("{}", imperative_sum_of_odd_squares(number as usize));
-    println!("{}", functional_sum_of_odd_squares(number as usize));
+    println!("{}", imperative_sum_of_odd_squares(number as u64));
+    println!("{}", functional_sum_of_odd_squares(number as u128));
 }
 
-fn is_odd(num: usize) -> bool {
+fn is_odd(num: u128) -> bool {
     num % 2 == 1
 }
 
-fn imperative_sum_of_odd_squares(upper: usize) -> usize {
-    let (mut square, mut n) = (1, 1);
-    let mut total: usize = 0;
-    while square < upper {
-        if square % 2 == 1 {
+fn imperative_sum_of_odd_squares(upper: u64) -> u128 {
+    let mut square:u128 = 1;
+    let mut n: u64 = 1;
+    let mut total: u128 = 0;
+    while square < upper as u128 {
+        if is_odd(square) {
             total += square;
         }
         n += 1;
-        square = n * n;
+        square = (n * n) as u128;
     }
 
     total
 }
 
-fn functional_sum_of_odd_squares(num: usize) -> usize {
+fn functional_sum_of_odd_squares(num: u128) -> u128 {
     let total = 
         (1..num).map(|n| n * n)
                 .take_while(|&n_sq| n_sq < num)
